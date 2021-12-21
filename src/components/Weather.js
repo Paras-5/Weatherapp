@@ -3,7 +3,7 @@ import "./css/style.css";
 const Weather =() =>{
 
     const[city,setCity] = useState(null);
-    const[search,setSearch] = useState("Mumbai");
+    const[search,setSearch] = useState("");
 
     useEffect(  () => {
         const fetchApi = async () =>{
@@ -18,7 +18,7 @@ const Weather =() =>{
         <>
 
             <div>
-                <h1 className = "heading">Weather App</h1>
+                <h1 className = "heading">Weather Forecast</h1>
             </div>
             <div className="mainbox">
                 <div className="inputData">
@@ -28,7 +28,6 @@ const Weather =() =>{
                     className="inputfield"
                     onChange={ (event) => {setSearch(event.target.value) } }/>
                 </div>
-
                 {!city ? (
                      <p className="ErrorMessage"> No Data Found </p>
                 ) : (
