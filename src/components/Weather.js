@@ -1,5 +1,6 @@
 import React,{useEffect,useState} from "react";
 import "./css/style.css";
+
 const Weather =() =>{
 
     const[city,setCity] = useState(null);
@@ -26,7 +27,13 @@ const Weather =() =>{
                     type="search"
                     value={search}
                     className="inputfield"
-                    onChange={ (event) => {setSearch(event.target.value) } }/>
+                    onChange={(event) => {setSearch(event.target.value) }} />
+                    <button class="addBtn" 
+                    type="submit"
+                    value={search}
+                    onClick={(event) => {setSearch(event.target.value) }}>
+                    <i class="fas fa-search"></i>
+                    </button>
                 </div>
                 {!city ? (
                      <p className="ErrorMessage"> No Data Found </p>
@@ -37,10 +44,10 @@ const Weather =() =>{
                 <i className="fas fa-cloud-sun"></i> {search}
                 </h2>
                 <h1 className="temperature">
-                {city.temp}Cel
+                {city.temp}&#8451;
                 </h1>
                 <h3 className="tempmin_max">
-                Min : {city.temp_min}Cel | Max : {city.temp_max}Cel 
+                Min : {city.temp_min}&#8451; | Max : {city.temp_max}&#8451;
                 </h3>
                 </div>
                 </div>)
