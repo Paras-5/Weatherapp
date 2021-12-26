@@ -1,6 +1,7 @@
 import React,{useEffect,useState} from "react";
 import "../css/style.css";
 import axios from "axios";
+import "../assets/clouds1.jpg"
 
 
 const Weather =() =>{
@@ -8,23 +9,23 @@ const Weather =() =>{
     const[city,setCity] = useState(null);
     const[search,setSearch] = useState("");
 
-    // useEffect(  () => {
-    //     const fetchApi = async () =>{
-    //         const url = `https://api.openweathermap.org/data/2.5/weather?q=${search}&units=metric&appid=3f771eb6b5fa7305a11fee0dc96d51b6`
-    //         const response = await fetch(url);
-    //         const resJson = await response.json();
-    //         setCity(resJson.main);
-    //     }
-    //      fetchApi();
-    // },[search])
-
-    useEffect(() => {
-        async function getData(){
-            const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${search}&units=metric&appid=3f771eb6b5fa7305a11fee0dc96d51b6`);
-            setCity(response.main);
+    useEffect(  () => {
+        const fetchApi = async () =>{
+            const url = `https://api.openweathermap.org/data/2.5/weather?q=${search}&units=metric&appid=3f771eb6b5fa7305a11fee0dc96d51b6`
+            const response = await fetch(url);
+            const resJson = await response.json();
+            setCity(resJson.main);
         }
-        getData();
+         fetchApi();
     },[search])
+
+    // useEffect(() => {
+    //     async function getData(){
+    //         const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${search}&units=metric&appid=3f771eb6b5fa7305a11fee0dc96d51b6`);
+    //         setCity(response.main);
+    //     }
+    //     getData();
+    // },[search])
 
     // useEffect(  () => {
     //     const fetchApi = async () =>{
