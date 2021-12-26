@@ -1,20 +1,40 @@
 import React,{useEffect,useState} from "react";
-import "./css/style.css";
+import "../css/style.css";
+import axios from "axios";
+
 
 const Weather =() =>{
 
     const[city,setCity] = useState(null);
     const[search,setSearch] = useState("");
 
-    useEffect(  () => {
-        const fetchApi = async () =>{
-            const url = `https://api.openweathermap.org/data/2.5/weather?q=${search}&units=metric&appid=3f771eb6b5fa7305a11fee0dc96d51b6`
-            const response = await fetch(url);
-            const resJson = await response.json();
-            setCity(resJson.main);
+    // useEffect(  () => {
+    //     const fetchApi = async () =>{
+    //         const url = `https://api.openweathermap.org/data/2.5/weather?q=${search}&units=metric&appid=3f771eb6b5fa7305a11fee0dc96d51b6`
+    //         const response = await fetch(url);
+    //         const resJson = await response.json();
+    //         setCity(resJson.main);
+    //     }
+    //      fetchApi();
+    // },[search])
+
+    useEffect(() => {
+        async function getData(){
+            const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${search}&units=metric&appid=3f771eb6b5fa7305a11fee0dc96d51b6`);
+            setCity(response.main);
         }
-         fetchApi();
+        getData();
     },[search])
+
+    // useEffect(  () => {
+    //     const fetchApi = async () =>{
+    //         const  response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${search}&units=metric&appid=3f771eb6b5fa7305a11fee0dc96d51b6`);
+    //         setCity(response.main);
+    //     }
+    //      fetchApi();
+    // },[search])
+     
+
     return(
         <>
 
@@ -25,14 +45,14 @@ const Weather =() =>{
                 <div className="inputData">
                      <input 
                     type="search"
+                    placeholder="Search any city"
                     value={search}
                     className="inputfield"
                     onChange={(event) => {setSearch(event.target.value) }} />
                     <button class="addBtn" 
                     type="submit"
-                    value={search}
                     onClick={(event) => {setSearch(event.target.value) }}>
-                    <i class="fas fa-search"></i>
+                    <i className="fas fa-search"></i>
                     </button>
                 </div>
                 {!city ? (
